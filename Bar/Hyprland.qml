@@ -6,18 +6,16 @@ import qs.Utils
 Rectangle {
     id: root
     height: 20
-    width: workspaces.width + Config.padding.large
+    implicitWidth: workspaces.width
     color: 'transparent'
     radius: Config.radius.normal
-    Behavior on width {
+    Behavior on implicitWidth {
         NumberAnimation {
             duration: 250
             easing.bezierCurve: [0.38, 1.21, 0.22, 1, 1, 1]   
         }
     }
     RowLayout {
-        anchors.left: parent.left
-        anchors.leftMargin: Config.padding.small
         id: workspaces
         height: root.height
         spacing: Config.spacing.small

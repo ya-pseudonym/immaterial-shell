@@ -9,4 +9,5 @@ Singleton {
         property bool dashboard:        false
         property bool launchwindow:     false
         property bool launcher:         false
+        property bool settings:         false
 }

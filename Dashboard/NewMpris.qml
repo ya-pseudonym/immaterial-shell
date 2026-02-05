@@ -101,7 +101,7 @@ ClippingRectangle {
                             color: Config.colors.secondary
                             property string pos: Media.formattedPosition
                             property string len: Media.formattedLength
-                            text: Media.media.isPlaying? "Paused..." : `${pos}/${len}`
+                            text: Media.media.isPlaying?  `${pos}/${len}` : `${pos}/${len} (paused)`
                         }
 
                         ClippingRectangle {

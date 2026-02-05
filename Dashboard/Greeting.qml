@@ -70,9 +70,14 @@ Rectangle {
             lineWidth: 4
             implicitSize: 48
             Text {
-                anchors.centerIn: parent
+                x: parent.width / 2 - width / 2
+                y: parent.height / 2 - height / 2
                 color: Config.colors.primary
+                font.family: Config.font.family
                 font.pointSize: 10
+                font.variableAxes: {
+                    "wght": 500
+                }
                 text: `${System.cpu}%`
             }
         }
@@ -95,7 +100,9 @@ Rectangle {
             lineWidth: 4
             implicitSize: 48
             Text {
-                anchors.centerIn: parent
+                font.family: Config.font.family
+                x: parent.width / 2 - width / 2
+                y: parent.height / 2 - height / 2
                 color: Config.colors.secondary
                 font.pointSize: 10
                 text: `${System.mem}%`
@@ -114,14 +121,31 @@ Rectangle {
         }
         ColumnLayout{
             CircularProgress {
-                colPrimary: Config.colors.tertiary
-                colSecondary: Config.colors.tertiaryContainer
+                colPrimary: System.bat > 20 ? Config.colors.tertiary : Config.colors.error
+                colSecondary: System.bat > 20 ? Config.colors.tertiaryContainer : Config.colors.errorContainer
                 value: System.bat / 100
                 lineWidth: 4
                 implicitSize: 48
+                Behavior on colPrimary{
+                    ColorAnimation {
+                        duration: 500
+                    }
+                }
+                Behavior on colSecondary{
+                    ColorAnimation {
+                        duration: 500
+                    }
+                }
                 Text {
-                    anchors.centerIn: parent
-                    color: Config.colors.tertiary
+                    font.family: Config.font.family
+                    x: parent.width / 2 - width / 2
+                    y: parent.height / 2 - height / 2
+                    color: System.bat > 20? Config.colors.tertiary : Config.colors.error
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 500
+                        }
+                    }
                     font.pointSize: 10
                     text: `${System.bat}%`
                 }
@@ -150,7 +174,7 @@ Rectangle {
         font.variableAxes: {
             "wght": 600
         }
-        color: Config.colors.primaryFix
+        color: System.bat > 20? Config.colors.primaryFix : Config.colors.error
         text: Quotes.currentText
     }
     

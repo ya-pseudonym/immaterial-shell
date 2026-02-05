@@ -46,6 +46,8 @@ Singleton {
         property color onTertiary:             matugen_colors.on_tertiary
         property color tertiaryFix:            matugen_colors.tertiary_fixed
         property color tertiaryFixDim:         matugen_colors.tertiary_fixed_dim
+        property color error:                  matugen_colors.error
+        property color errorContainer:         matugen_colors.error_container
         
     }
     easing: QtObject {
@@ -65,6 +67,11 @@ Singleton {
         property int large:         12 * scale
         property int xl:            16 * scale
         property int full:          1000 * scale
+        Behavior on scale {
+            NumberAnimation {
+                duration: 100
+            }
+        }
     }
     padding: QtObject {
         property real scale:        1

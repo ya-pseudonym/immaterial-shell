@@ -30,28 +30,27 @@ Scope {
             RowLayout {
                 anchors.left: back.left
                 anchors.leftMargin: Config.padding.small
-                spacing:Config.spacing.normal
+                spacing:Config.spacing.small
                 height: back.height
                 Hyprland{
                     id: hypr
                 }
+                Window{}
             }
+
             RowLayout {
                 anchors.horizontalCenter: back.horizontalCenter
                 height: back.height
-                Window{}
+                Clock {
+                    id: clock
+                }
             }
             RowLayout {
                 anchors.right: back.right
                 anchors.rightMargin: Config.padding.small
                 height: back.height
                 Music{}
-                Clock {
-                    id: clock
-                }
-                Battery{
-                    id: bat
-                }
+                SystemCircles{}
             }
 
         }
@@ -82,7 +81,7 @@ Scope {
                     Status.dashwindow = true;
                 }
                 if (Status.dashboard == false) {
-                    Quotes.random = (Math.floor(Math.random() * Quotes.quotes.length))
+                 Quotes.randomize()   
                 }
                 Status.dashboard = !Status.dashboard
             }

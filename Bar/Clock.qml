@@ -12,6 +12,16 @@ Rectangle {
         id: clock
         precision: SystemClock.Minutes
     }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            if (Status.dashwindow == false) {
+                
+                Status.dashwindow = true
+            }
+            Status.dashboard = !Status.dashboard
+        }
+    }
     Text {
         font.pointSize: 8
         font.family: Config.font.family

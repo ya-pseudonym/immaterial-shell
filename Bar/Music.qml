@@ -17,7 +17,7 @@ RowLayout {
     Text {
         font.family: Config.font.family
         color: Config.colors.primary
-        text: Media.title? Media.title : "Nothing playing..."
+        text: Media.title? Media.media.isPlaying? Media.title : `${Media.title} (paused)` : "Nothing playing..."
         font.variableAxes: {
             "wght": 500
         }
@@ -26,7 +26,13 @@ RowLayout {
     }
     CircularProgress {
         implicitSize: 20
-        value: Media.position? Media.position / Media.length : 0
+        value: Media.position? (Media.position / Media.length ) % 1 : 0
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                Media.media.togglePlaying()
+            }
+        }
     Image {
         id: musicNote
         anchors.centerIn: parent

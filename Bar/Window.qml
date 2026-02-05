@@ -4,18 +4,10 @@ import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell.Widgets
 import qs.Utils
-ClippingRectangle {
+Item {
     id: root
-    anchors.horizontalCenter: parent.horizontalCenter
     height: 20
-    width: windowName.width + Config.padding.large
-    Behavior on width {
-        NumberAnimation {
-            duration: 100
-        }
-    }
-    color: 'transparent'
-    radius: Config.radius.normal
+    width: windowName.width
     readonly property HyprlandMonitor monitor: Hyprland.monitorFor(root.QsWindow?.window.screen)
     property bool focusing: HyprlandData.activeWorkspace?.monitor === monitor?.name
     readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
@@ -27,6 +19,12 @@ ClippingRectangle {
         font.family: Config.font.family
         font.variableAxes: {
             "wght": 400
+        }
+        opacity: root.focusing && root.activeWindow?.activated && root.biggest? 1 : 0.5
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+            }
         }
         color: Config.colors.primaryFix
         font.pointSize: 9
