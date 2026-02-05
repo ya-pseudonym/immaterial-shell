@@ -4,29 +4,30 @@ import QtQuick
 import QtQuick.Layouts
 import qs.Utils
 Rectangle {
-    anchors.centerIn: parent
     id: root
     height: 20
     width: workspaces.width + Config.padding.large
-    color: Config.colors.containerMed
+    color: 'transparent'
     radius: Config.radius.normal
     Behavior on width {
         NumberAnimation {
-            duration: 200
+            duration: 250
             easing.bezierCurve: [0.38, 1.21, 0.22, 1, 1, 1]   
         }
     }
     RowLayout {
+        anchors.left: parent.left
+        anchors.leftMargin: Config.padding.small
         id: workspaces
         height: root.height
-        anchors.horizontalCenter: root.horizontalCenter
+        spacing: Config.spacing.small
         Repeater {
             id: ws
             model: Hyprland.workspaces
-
+            
             Rectangle {
                 id: holder
-                implicitWidth: rect.isActive? 36 : 12
+                implicitWidth: rect.isActive? 36 : 16
                 color: 'transparent'
                 height: 12
                 states: [
@@ -37,8 +38,11 @@ Rectangle {
                             target: rect
                             color: Config.colors.primary
                             width: 32
-                            height: 12
                         }
+			PropertyChanges {
+				target: workspaceNumber
+				color: Config.colors.containerHighest
+			}
                     },
                     State {
                         name: 'inactive'
@@ -55,13 +59,12 @@ Rectangle {
                         from: 'inactive'; to: 'active'
                         NumberAnimation {
                             properties: 'width'
-                            duration: 350
-                            easing.bezierCurve: [0.38, 1.21, 0.22, 1, 1, 1]
+                            duration: 250
+                            easing.bezierCurve: [0.38, 1.75, 0.22, 1, 1, 1]
                         }
                         ColorAnimation {
                             properties: 'color'
-                            duration: 500
-                            easing.bezierCurve: [0.38, 1.21, 0.22, 1, 1, 1]
+                            duration: 250
                         }
                         }
                 ]
@@ -73,6 +76,21 @@ Rectangle {
                 height: 12
                 color: Config.colors.containerHighest
                 radius: Config.radius.normal
+		Text {
+            visible: false
+			id: workspaceNumber
+            width: parent.width
+            height: parent.height
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+			font.family: Config.font.family
+			font.pointSize: 7
+			font.variableAxes: {
+				"wght": 800
+			}
+			color: Config.colors.containerLow
+			text: index + 1
+		}
             }
             }
 

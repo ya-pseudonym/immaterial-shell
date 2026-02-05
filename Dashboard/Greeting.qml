@@ -29,7 +29,7 @@ Rectangle {
             font.pointSize: 12
             color: Config.colors.primaryFix
             font.variableAxes: {
-                "wght": 550
+                "wght": 700
             }
             x: parent.width / 2 - width / 2
             text: `Hello, ${System.name}!`
@@ -142,13 +142,13 @@ Rectangle {
     Text {
         id: quote
         anchors.top: sys.bottom
-        width: parent.width - Config.padding.normal
+        width: parent.width
         anchors.topMargin: Config.padding.large
         horizontalAlignment: Text.AlignHCenter
         wrapMode: Text.Wrap
         font.family: Config.font.family
         font.variableAxes: {
-            "wght": 500
+            "wght": 600
         }
         color: Config.colors.primaryFix
         text: Quotes.currentText

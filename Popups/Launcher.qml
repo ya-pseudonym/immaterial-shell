@@ -28,14 +28,30 @@ Scope {
                 width: 256
                 height: 48
                 x: parent.width / 2 - width / 2
-                y: root.isActive()? 12 : -height
+                y: screen.height / 2 - height / 2 - height
                 opacity: root.isActive()? 1 : 0
+                topLeftRadius: Config.radius.large
+                topRightRadius: Config.radius.large
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: 50
+                        duration: 25
+                        onRunningChanged: {
+                            if (!running && Status.launcher == false) {
+                                Status.launchwindow = false;
+                            }
+                        }
                     }
+
                 }
                 color: Config.colors.bg
+                Rectangle {
+                    x: parent.width / 2 - width / 2
+                    y: parent.height / 2 - height / 2
+                    width: parent.width - Config.padding.normal
+                    height: parent.height - Config.padding.normal
+                    radius: Config.radius.normal
+                    color: Config.colors.containerMed
+                }
                 TextInput {
                     id: entry
                     focus: true
@@ -78,21 +94,14 @@ Scope {
                     visible: entry.searchEmpty
                     anchors.centerIn: parent
                     color: Config.colors.primary
-                    text: 'Search for something...'
-                }
-                Behavior on y {
-                    NumberAnimation {
-                        duration: 250
-                        easing.bezierCurve: [0.38, 1.21, 0.22, 1, 1, 1]
-                        onRunningChanged: {
-                            if (!running && Status.launcher == false) {
-                                Status.launchwindow = false
-                            }
-                        }
+                    font.variableAxes: {
+                        "wght": 550
                     }
+                    text: 'Search for something...'
                 }
             }
             ClippingRectangle {
+                    id: entries
                     anchors.horizontalCenter: search.horizontalCenter
                     anchors.top: search.bottom
                     color:  Config.colors.bg
@@ -161,6 +170,11 @@ Scope {
                                 }
                             }
                         ]
+                        IconImage {
+                            anchors.left: parent.left
+                            anchors.leftMargin: Config.padding.normal
+                            source: iconPath(modelData.icon)
+                        }
                         Text {
                             id: name
                             x: parent.width / 2 - width / 2

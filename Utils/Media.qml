@@ -32,6 +32,7 @@ Singleton {
                 root.title = ""
                 root.artist = ""
                 root.cover = ""
+                root.progress = 0
             } else {
             root.formattedPosition = formatTime(media.position)
             root.formattedLength = formatTime(media.length)

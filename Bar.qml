@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Io
+import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import qs.Bar
@@ -29,22 +30,25 @@ Scope {
             RowLayout {
                 anchors.left: back.left
                 anchors.leftMargin: Config.padding.small
-                height: back.height
-                Clock{
-                    id: clock
-                }
-            }
-            RowLayout {
-                anchors.horizontalCenter: back.horizontalCenter
+                spacing:Config.spacing.normal
                 height: back.height
                 Hyprland{
                     id: hypr
                 }
             }
             RowLayout {
+                anchors.horizontalCenter: back.horizontalCenter
+                height: back.height
+                Window{}
+            }
+            RowLayout {
                 anchors.right: back.right
                 anchors.rightMargin: Config.padding.small
                 height: back.height
+                Music{}
+                Clock {
+                    id: clock
+                }
                 Battery{
                     id: bat
                 }
@@ -56,14 +60,19 @@ Scope {
             visible: Status.dashwindow
             anchor.window: barWindow
             anchor.rect.x: barWindow.width / 2 - width / 2
-            anchor.rect.y: 28
+            anchor.rect.y: 36
             color: 'transparent'
             implicitHeight: 256
-            implicitWidth: 512
+	    implicitWidth: 512
+	    ClippingRectangle{
+		    anchors.fill: parent
+		    radius: Config.radius.large
+		    color: 'transparent'
                 Dashboard{
                     anchors.horizontalCenter: parent.horizontalCenter
                     id: dash
-                }
+	    		}
+   		}
         }
         IpcHandler {
             target: "dashboard"

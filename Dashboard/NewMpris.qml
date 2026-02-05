@@ -49,6 +49,11 @@ ClippingRectangle {
                         fillMode: Image.PreserveAspectCrop
                         sourceSize.width: cover.width
                         sourceSize.height: cover.height
+                        layer.enabled: true
+                        layer.effect: MultiEffect {
+                            brightness: Media.media.isPlaying ? 0 : -0.1
+                            saturation: Media.media.isPlaying ? 0 : -0.2
+                        }
                     }
                 }
                 ClippingRectangle {
@@ -96,7 +101,7 @@ ClippingRectangle {
                             color: Config.colors.secondary
                             property string pos: Media.formattedPosition
                             property string len: Media.formattedLength
-                            text: Media.media == undefined? "" : `${pos}/${len}`
+                            text: Media.media.isPlaying? "Paused..." : `${pos}/${len}`
                         }
 
                         ClippingRectangle {
@@ -134,7 +139,7 @@ ClippingRectangle {
 
                     Rectangle {
                         id: previous
-                        width: 72
+                        width: 64
                         radius: Config.radius.normal
                         color: Config.colors.secondary
                         anchors {
@@ -189,7 +194,7 @@ ClippingRectangle {
                     }
                     Rectangle {
                         id: next
-                        width: 72
+                        width: 64
                         radius: Config.radius.normal
                         color: Config.colors.secondary
                         anchors {

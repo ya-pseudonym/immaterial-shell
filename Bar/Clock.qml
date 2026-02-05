@@ -7,7 +7,7 @@ Rectangle {
     implicitHeight: 20
     implicitWidth: 64
     radius: Config.radius.normal
-    color: Config.colors.containerHigh
+    color: 'transparent'
     SystemClock {
         id: clock
         precision: SystemClock.Minutes
@@ -16,13 +16,13 @@ Rectangle {
         font.pointSize: 8
         font.family: Config.font.family
         font.variableAxes: {
-            "wght": 600
+            "wght": 500
         }
         height: root.height
         width: root.width
         text: Qt.formatDateTime(clock.date, "hh:mm AP")
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        color: Config.colors.primary
+        color: Config.colors.secondary
     }
 }

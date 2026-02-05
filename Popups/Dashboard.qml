@@ -19,12 +19,11 @@ import qs.Common
         implicitWidth: 512
         y: isStatus()? 0 : -height
         color: Config.colors.bg
-        bottomLeftRadius: Config.radius.large
-        bottomRightRadius: Config.radius.large
+	radius: Config.radius.large
         Behavior on y {
             NumberAnimation {
-                duration: 350
-                easing.bezierCurve: [0.38, 1.21, 0.22, 1, 1, 1]
+                duration: 250
+                easing.bezierCurve: [0.38, 1.15, 0.22, 1, 1, 1]
                 onRunningChanged: {
                     if (!running && Status.dashboard == false) {
                         Status.dashwindow = false
