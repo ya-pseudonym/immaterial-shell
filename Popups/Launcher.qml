@@ -5,14 +5,15 @@ import QtQuick.Layouts
 import Quickshell.Wayland
 import Quickshell.Widgets
 import "root:Utils/fuzzy.js" as FuzzySort
-import 'root:Utils'
+import "root:Utils"
+
 Scope {
     id: root
     function isActive() {
         if (Status.launcher == false) {
-            return false
+            return false;
         } else {
-            return true
+            return true;
         }
     }
     LazyLoader {
@@ -29,7 +30,7 @@ Scope {
                 height: 48
                 x: parent.width / 2 - width / 2
                 y: screen.height / 2 - height / 2 - height
-                opacity: root.isActive()? 1 : 0
+                opacity: root.isActive() ? 1 : 0
                 topLeftRadius: Config.radius.large
                 topRightRadius: Config.radius.large
                 Behavior on opacity {
@@ -41,7 +42,6 @@ Scope {
                             }
                         }
                     }
-
                 }
                 color: Config.colors.bg
                 Rectangle {
@@ -72,17 +72,17 @@ Scope {
                     property var current: appView.currentIndex
 
                     Keys.onReturnPressed: {
-                                    const list = appView.model;
-                                    list[appView.currentIndex].execute()
-                                    Status.launcher = false;
-                                }
+                        const list = appView.model;
+                        list[appView.currentIndex].execute();
+                        Status.launcher = false;
+                    }
                     Keys.onDownPressed: {
-                        appView.incrementCurrentIndex()
-                        current = appView.currentIndex
+                        appView.incrementCurrentIndex();
+                        current = appView.currentIndex;
                     }
                     Keys.onUpPressed: {
-                        appView.decrementCurrentIndex()
-                        current = appView.currentIndex
+                        appView.decrementCurrentIndex();
+                        current = appView.currentIndex;
                     }
                     Keys.onEscapePressed: {
                         Status.launcher = false;
@@ -101,34 +101,33 @@ Scope {
                 }
             }
             ClippingRectangle {
-                    id: entries
-                    anchors.horizontalCenter: search.horizontalCenter
-                    anchors.top: search.bottom
-                    color:  Config.colors.bg
-                    height: 128
-                    width: 256
-                    bottomLeftRadius: Config.radius.large
-                    bottomRightRadius: Config.radius.large
-                    opacity: root.isActive()? 1 : 0
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 100
-                        }
+                id: entries
+                anchors.horizontalCenter: search.horizontalCenter
+                anchors.top: search.bottom
+                color: Config.colors.bg
+                height: 128
+                width: 256
+                bottomLeftRadius: Config.radius.large
+                bottomRightRadius: Config.radius.large
+                opacity: root.isActive() ? 1 : 0
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 100
                     }
+                }
                 ListView {
                     id: appView
                     anchors.centerIn: parent
                     height: parent.height - Config.padding.normal
                     width: parent.width - Config.padding.normal
-                    model: FuzzySort.go(
-                        entry.text,
-                        DesktopEntries.applications.values, {
-                            all: true,
-                            keys: ["name","genericName"]}).map(a => a.obj)
+                    model: FuzzySort.go(entry.text, DesktopEntries.applications.values, {
+                        all: true,
+                        keys: ["name", "genericName"]
+                    }).map(a => a.obj)
                     spacing: Config.spacing.tiny
                     function launchModelData(): void {
                         if (currentItem && currentItem.modelData) {
-                            currentItem.modelData.execute()
+                            currentItem.modelData.execute();
                             Status.launcher = false;
                         }
                     }
@@ -147,26 +146,30 @@ Scope {
 
                                 PropertyChanges {
                                     target: delegated
-                                    color: Config.colors.primary
+                                    color: Config.colors.containerHighest
                                 }
                                 PropertyChanges {
-                                    target: name 
-                                    color: Config.colors.containerMed
+                                    target: name
+                                    color: Config.colors.primaryFix
                                     weight: 900
                                     textWidth: 120
                                 }
-
                             }
                         ]
                         transitions: [
                             Transition {
-                                from: ""; to: "selected"
+                                from: ""
+                                to: "selected"
                                 reversible: true
                                 ColorAnimation {
-                                    properties: "color"; duration: 300; easing.type: Easing.OutQuad;
+                                    properties: "color"
+                                    duration: 300
+                                    easing.type: Easing.OutQuad
                                 }
                                 NumberAnimation {
-                                    properties: "weight, textWidth"; duration: 300; easing.type: Easing.OutQuad
+                                    properties: "weight, textWidth"
+                                    duration: 300
+                                    easing.type: Easing.OutQuad
                                 }
                             }
                         ]
@@ -189,13 +192,9 @@ Scope {
                                 "wght": weight
                             }
                         }
-
                     }
-
                 }
             }
         }
-
     }
-
 }

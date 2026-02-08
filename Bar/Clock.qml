@@ -2,25 +2,28 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 import qs.Utils
+
 Rectangle {
     id: root
-    implicitHeight: 20
-    implicitWidth: 64
+    implicitHeight: 32
+    implicitWidth: 128
     radius: Config.radius.normal
     color: 'transparent'
+    MouseArea {
+        height: 32
+        width: 512
+        hoverEnabled: true
+        onEntered: {
+            if (Status.dashwindow == false) {
+                Quotes.randomize();
+            }
+            Status.dashwindow = true;
+            Status.dashboard = true;
+        }
+    }
     SystemClock {
         id: clock
         precision: SystemClock.Minutes
-    }
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            if (Status.dashwindow == false) {
-                
-                Status.dashwindow = true
-            }
-            Status.dashboard = !Status.dashboard
-        }
     }
     Text {
         font.pointSize: 8
@@ -30,6 +33,7 @@ Rectangle {
         }
         height: root.height
         width: root.width
+        anchors.centerIn: parent
         text: Qt.formatDateTime(clock.date, "hh:mm AP")
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter

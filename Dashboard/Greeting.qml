@@ -4,10 +4,11 @@ import QtQuick
 import QtQuick.Layouts
 import qs.Utils
 import qs.Common
+
 Rectangle {
     id: root
     function refresh(): void {
-       random = Math.floor(Math.random * quotes.length)
+        random = Math.floor(Math.random * quotes.length);
     }
     height: 256 - Config.padding.normal
     width: 256 - Config.padding.normal
@@ -42,7 +43,7 @@ Rectangle {
             font.pointSize: 10
             font.variableAxes: {
                 "wght": 600,
-                "wdth": 120,
+                "wdth": 120
             }
             text: `${System.time}`
         }
@@ -64,74 +65,74 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.topMargin: Config.padding.small
         ColumnLayout {
-        CircularProgress {
-            id: cpu
-            value: System.cpu / 100
-            lineWidth: 4
-            implicitSize: 48
-            Text {
-                x: parent.width / 2 - width / 2
-                y: parent.height / 2 - height / 2
-                color: Config.colors.primary
-                font.family: Config.font.family
-                font.pointSize: 10
-                font.variableAxes: {
-                    "wght": 500
+            CircularProgress {
+                id: cpu
+                value: System.cpu / 100
+                lineWidth: 4
+                implicitSize: 48
+                Text {
+                    x: parent.width / 2 - width / 2
+                    y: parent.height / 2 - height / 2
+                    color: Config.colors.primary
+                    font.family: Config.font.family
+                    font.pointSize: 10
+                    font.variableAxes: {
+                        "wght": 500
+                    }
+                    text: `${System.cpu}%`
                 }
-                text: `${System.cpu}%`
             }
-        }
-        Text {
-            font.family: Config.font.family
-            color: Config.colors.primary
-            font.variableAxes: {
-                "wght": 700
+            Text {
+                font.family: Config.font.family
+                color: Config.colors.primary
+                font.variableAxes: {
+                    "wght": 700
+                }
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pointSize: 8
+                text: 'CPU'
             }
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pointSize: 8
-            text: 'CPU'
-        }
         }
         ColumnLayout {
             CircularProgress {
-            colPrimary: Config.colors.secondary
-            colSecondary: Config.colors.secondaryContainer
-            value: System.mem / 100
-            lineWidth: 4
-            implicitSize: 48
+                colPrimary: Config.colors.secondary
+                colSecondary: Config.colors.secondaryContainer
+                value: System.mem / 100
+                lineWidth: 4
+                implicitSize: 48
+                Text {
+                    font.family: Config.font.family
+                    x: parent.width / 2 - width / 2
+                    y: parent.height / 2 - height / 2
+                    color: Config.colors.secondary
+                    font.pointSize: 10
+                    text: `${System.mem}%`
+                }
+            }
             Text {
                 font.family: Config.font.family
-                x: parent.width / 2 - width / 2
-                y: parent.height / 2 - height / 2
                 color: Config.colors.secondary
-                font.pointSize: 10
-                text: `${System.mem}%`
+                font.variableAxes: {
+                    "wght": 700
+                }
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pointSize: 8
+                text: 'MEM'
             }
         }
-        Text {
-            font.family: Config.font.family
-            color: Config.colors.secondary
-            font.variableAxes: {
-                "wght": 700
-            }
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pointSize: 8
-            text: 'MEM'
-        }
-        }
-        ColumnLayout{
+        ColumnLayout {
             CircularProgress {
                 colPrimary: System.bat > 20 ? Config.colors.tertiary : Config.colors.error
                 colSecondary: System.bat > 20 ? Config.colors.tertiaryContainer : Config.colors.errorContainer
                 value: System.bat / 100
                 lineWidth: 4
                 implicitSize: 48
-                Behavior on colPrimary{
+                Behavior on colPrimary {
                     ColorAnimation {
                         duration: 500
                     }
                 }
-                Behavior on colSecondary{
+                Behavior on colSecondary {
                     ColorAnimation {
                         duration: 500
                     }
@@ -140,7 +141,7 @@ Rectangle {
                     font.family: Config.font.family
                     x: parent.width / 2 - width / 2
                     y: parent.height / 2 - height / 2
-                    color: System.bat > 20? Config.colors.tertiary : Config.colors.error
+                    color: System.bat > 20 ? Config.colors.tertiary : Config.colors.error
                     Behavior on color {
                         ColorAnimation {
                             duration: 500
@@ -174,8 +175,7 @@ Rectangle {
         font.variableAxes: {
             "wght": 600
         }
-        color: System.bat > 20? Config.colors.primaryFix : Config.colors.error
+        color: System.bat > 20 ? Config.colors.primaryFix : Config.colors.error
         text: Quotes.currentText
     }
-    
 }

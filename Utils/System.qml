@@ -3,6 +3,7 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 import QtQuick
+
 Singleton {
     id: root
     property int bat
@@ -17,7 +18,7 @@ Singleton {
         command: ["whoami"]
         stdout: StdioCollector {
             onStreamFinished: {
-                root.name = this.text.replace("\n","")
+                root.name = this.text.replace("\n", "");
             }
         }
     }
@@ -29,8 +30,8 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 root.bat = parseInt(this.data);
-                        }
-                    }
+            }
+        }
     }
     Process {
         id: cpuProc
@@ -57,9 +58,9 @@ Singleton {
         running: true
         repeat: true
         onTriggered: {
-            batProc.running = true
-            cpuProc.running = true
-            memProc.running = true
+            batProc.running = true;
+            cpuProc.running = true;
+            memProc.running = true;
         }
     }
     SystemClock {

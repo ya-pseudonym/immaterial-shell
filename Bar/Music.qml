@@ -6,8 +6,9 @@ import QtQuick.Effects
 import qs.Utils
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
+
 RowLayout {
-    opacity: Media.title? 1 : 0
+    opacity: Media.title ? 1 : 0
     height: 20
     Behavior on opacity {
         NumberAnimation {
@@ -17,7 +18,13 @@ RowLayout {
     Text {
         font.family: Config.font.family
         color: Config.colors.primary
-        text: Media.title? Media.media.isPlaying? Media.title : `${Media.title} (paused)` : "Nothing playing..."
+        text: Media.title ? Media.media.isPlaying ? Media.title : `${Media.title} (paused)` : "Nothing playing..."
+        opacity: Media.media.isPlaying ? 1 : 0.7
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+            }
+        }
         font.variableAxes: {
             "wght": 500
         }
@@ -26,26 +33,26 @@ RowLayout {
     }
     CircularProgress {
         implicitSize: 20
-        value: Media.position? (Media.position / Media.length ) % 1 : 0
+        value: Media.position ? (Media.position / Media.length) % 1 : 0
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                Media.media.togglePlaying()
+                Media.media.togglePlaying();
             }
         }
-    Image {
-        id: musicNote
-        anchors.centerIn: parent
-        height: 14
-        width: 14
-        source: 'root:Images/music_note.svg'
-        smooth: true
-        visible: false
+        Image {
+            id: musicNote
+            anchors.centerIn: parent
+            height: 14
+            width: 14
+            source: 'root:Images/music_note.svg'
+            smooth: true
+            visible: false
+        }
+        ColorOverlay {
+            anchors.fill: musicNote
+            source: musicNote
+            color: Config.colors.primary
+        }
     }
-    ColorOverlay {
-        anchors.fill: musicNote
-        source: musicNote
-        color: Config.colors.primary
-    }
-}
 }
