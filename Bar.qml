@@ -17,7 +17,6 @@ Scope {
         anchors {
             top: true
         }
-        WlrLayershell.namespace: 'ag-dash'
         implicitHeight: 32
         implicitWidth: screen.width
         color: 'transparent'
@@ -36,7 +35,7 @@ Scope {
             height: 32
             y: 0
             x: parent.width / 2 - width / 2
-            color: Qt.alpha(Config.colors.bg, 0.75)
+            color: Config.colors.bg
             bottomLeftRadius: Config.radius.large
             bottomRightRadius: Config.radius.large
 
