@@ -10,7 +10,7 @@ Singleton {
     property bool dashboard: false
     property bool launchwindow: false
     property bool launcher: false
-    property bool settings: false
+    property bool settings: true
     property bool controlCenter: false
     property bool controlCenterWin: false
     IpcHandler {

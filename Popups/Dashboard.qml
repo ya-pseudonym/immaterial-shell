@@ -6,22 +6,18 @@ import qs.Utils
 import qs.Dashboard
 import qs.Common
 
-Rectangle {
+ClippingRectangle {
     id: dash
     x: parent.width / 2 - width / 2
-    function isStatus() {
-        if (Status.dashboard == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    implicitHeight: 256
+    anchors.top: parent.top
+    implicitHeight: Status.dashboard ? 256 : 0
     implicitWidth: 512
-    y: isStatus() ? 0 : -height
     color: Config.colors.bg
-    bottomLeftRadius: Config.radius.large
-    bottomRightRadius: Config.radius.large
+    bottomLeftRadius: Config.radius.xl
+    bottomRightRadius: Config.radius.xl
+    function shouldShow() {
+
+    }
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
@@ -33,10 +29,10 @@ Rectangle {
             Status.dashboard = false;
         }
     }
-    Behavior on y {
+    Behavior on implicitHeight {
         NumberAnimation {
             duration: 350
-            easing.bezierCurve: [0.38, 1, 0.22, 1, 1, 1]
+            easing.bezierCurve: [0.22, 1, 0.85, 1, 1, 1]
             onRunningChanged: {
                 if (!running && Status.dashboard == false) {
                     Status.dashwindow = false;
@@ -46,8 +42,16 @@ Rectangle {
     }
     RowLayout {
         id: holder
-        anchors.fill: parent
-
+        opacity: Status.dashboard ? 1 : 0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 175
+            }
+        }
+        spacing: Config.spacing.normal
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: Config.padding.small
+        Layout.fillWidth: true
         Greeting {
             id: greeter
         }

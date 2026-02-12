@@ -48,9 +48,11 @@ Singleton {
         property color tertiaryFixDim: matugen_colors.tertiary_fixed_dim
         property color error: matugen_colors.error
         property color errorContainer: matugen_colors.error_container
+        property color inverseSurface: matugen_colors.inverse_surface
     }
     easing: QtObject {
-        property var standard: Easing.OutQuint
+        property var standard: [0.22, 1, 0.85, 1, 1, 1]
+        property var bouncy: [0.22, 1.4, 0.85, 1.1, 1, 1]
     }
     durations: QtObject {
         property int veryQuick: 100

@@ -13,11 +13,12 @@ Scope {
     id: root
 
     PanelWindow {
-        id: barWindow
         anchors {
             top: true
         }
+        id: barWindow
         implicitHeight: 32
+        exclusiveZone: 32
         implicitWidth: screen.width
         color: 'transparent'
         Corner {
@@ -95,8 +96,8 @@ Scope {
                 anchors.right: dash.left
                 Behavior on height {
                     NumberAnimation {
-                        duration: 500
-                        easing.bezierCurve: [0.38, 1.15, 0.22, 1, 1, 1]
+                        duration: 250
+                        easing.bezierCurve: [0.38, 1, 0.22, 1, 1, 1]
                     }
                 }
             }
@@ -114,8 +115,8 @@ Scope {
                 anchors.left: dash.right
                 Behavior on height {
                     NumberAnimation {
-                        duration: 500
-                        easing.bezierCurve: [0.38, 1.15, 0.22, 1, 1, 1]
+                        duration: 250
+                        easing.bezierCurve: [0.38, 1, 0.22, 1, 1, 1]
                     }
                 }
             }
@@ -134,4 +135,5 @@ Scope {
             }
         }
     }
+
 }

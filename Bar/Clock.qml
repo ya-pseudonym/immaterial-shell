@@ -9,18 +9,6 @@ Rectangle {
     implicitWidth: 128
     radius: Config.radius.normal
     color: 'transparent'
-    MouseArea {
-        height: 32
-        width: 512
-        hoverEnabled: true
-        onEntered: {
-            if (Status.dashwindow == false) {
-                Quotes.randomize();
-            }
-            Status.dashwindow = true;
-            Status.dashboard = true;
-        }
-    }
     SystemClock {
         id: clock
         precision: SystemClock.Minutes

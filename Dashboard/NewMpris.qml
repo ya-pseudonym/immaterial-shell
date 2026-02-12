@@ -41,11 +41,13 @@ ClippingRectangle {
             implicitSize: 128 + 8
             lineWidth: 6
             value: Media.position / Media.length
-            gapAngle: 360 / 28
+            gapAngle: 360 / 62
             anchors.top: parent.top
             anchors.topMargin: Config.spacing.tiny
             anchors.horizontalCenter: parent.horizontalCenter
+            colSecondary: Qt.alpha(Config.colors.primaryContainer, 0.5)
             animationDuration: 1000
+            fill: true
             property bool spin: Media.media.isPlaying
             ClippingRectangle {
                 id: clip

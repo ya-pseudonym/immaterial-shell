@@ -22,12 +22,11 @@ ShellRoot {
             Status.launcher = !Status.launcher;
         }
     }
-    Settings {
-        id: settings
+    Test {
+        id: test
     }
-    Visualizer {}
     IpcHandler {
-        target: 'settings'
+        target: 'test'
         function set(): void {
             console.log(Status.settings ? "Closing settings" : "Opening settings");
             Status.settings = !Status.settings;
